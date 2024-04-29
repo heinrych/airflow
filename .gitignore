@@ -1,0 +1,10 @@
+__pycache__
+teste*
+env
+j.json
+anotacoes.txt
+*.ipynb
+Keys.json
+.env
+*.csv
+logs/*
