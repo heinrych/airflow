@@ -1,5 +1,5 @@
 __pycache__
-teste*
+
 env
 j.json
 anotacoes.txt
@@ -8,3 +8,5 @@ Keys.json
 .env
 *.csv
 logs/*
+target
+dbt.log

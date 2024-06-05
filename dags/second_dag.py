@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from datetime import datetime
 
-dag = DAG('first_dag','hello word',
+dag = DAG('second_dag','hello word',
           schedule_interval=None, start_date=datetime(2024,4,10), 
           catchup=False) ## catchup = true executa todos os intervalos antes do start_date
 
