@@ -8,3 +8,5 @@ apache-airflow-providers-http==4.10.1
 apache-airflow-providers-imap==3.5.0
 apache-airflow-providers-smtp==1.6.1
 apache-airflow-providers-sqlite==3.7.1
+apache-airflow-providers-mysql
+

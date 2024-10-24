@@ -1,4 +1,4 @@
-FROM apache/airflow:2.5.1-python3.9
+FROM apache/airflow:2.9.0-python3.9
 
 WORKDIR /opt/airflow
 
@@ -25,8 +25,8 @@ RUN chmod -R 777 /opt/airflow
 
 USER airflow
 
-RUN pip install dbt
-RUN pip install dbt-athena-community
+#RUN pip install dbt
+#RUN pip install dbt-athena-community
 
 #RUN dbt run --project-dir /path/to/new --profiles-dir /path/to/new
 #or configure env

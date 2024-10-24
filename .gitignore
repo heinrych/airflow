@@ -1,5 +1,4 @@
 __pycache__
-
 env
 j.json
 anotacoes.txt
@@ -10,3 +9,4 @@ Keys.json
 logs/*
 target
 dbt.log
+profiles.yml

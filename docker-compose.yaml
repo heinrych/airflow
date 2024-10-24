@@ -1,22 +1,50 @@
 version: '3'
 services:
 
+  postgres:
+      image: postgres:13
+      environment:
+        POSTGRES_USER: airflow
+        POSTGRES_PASSWORD: airflow
+        POSTGRES_DB: airflow
+      volumes:
+        - ./postgres-db-volume:/var/lib/postgresql/data
+      healthcheck:
+        test: ["CMD", "pg_isready", "-U", "airflow"]
+        interval: 10s
+        retries: 5
+        start_period: 5s
+      ports:
+        - 5432:5432 # Porta HTTP
+      restart: always
+      networks:
+        - pipe-net  
 
   airflow:
     container_name: airflow
     build: ./
     hostname: airflow
     ports:
-      - 8080:8080 # Porta HTTP
+      - 80:8080 # Porta HTTP
     environment:
       - TESTE=1
       - PIP_ROOT_USER_ACTION=ignore
+      - _AIRFLOW_WWW_USER_USERNAME=teste
+      - _AIRFLOW_WWW_USER_PASSWORD_CMD=123456
+      - _AIRFLOW_WWW_USER_PASSWORD=123456
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres/airflow
+    depends_on:
+      - postgres
+
     networks:
-      - pipe-net
-   
-      
-      
-    
+      - pipe-net   
+
+
 networks: 
   pipe-net:
     driver: bridge 
+
+
+  
+  
