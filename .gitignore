@@ -10,3 +10,4 @@ logs/*
 target
 dbt.log
 profiles.yml
+postgres-db-volume
