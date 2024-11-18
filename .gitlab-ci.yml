@@ -1,0 +1,4 @@
+include:
+  - project: "polichat/infra/templates"
+    ref: main
+    file: "/templates/.gitlab-ci-default-2.0.yaml"
