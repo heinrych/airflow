@@ -30,6 +30,22 @@
 │   │   ├── logging.py           # Logging utility functions
 │   │   ├── data_transform.py    # Data transformation functions
 │   │   └── ...
+├── dbt/                        # dbt project directory
+│   ├── models/                 # dbt models
+│   │   ├── sales/              # Models specific to the sales domain
+│   │   ├── marketing/          # Models specific to the marketing domain
+│   │   ├── finance/            # Models specific to the finance domain
+│   │   └── shared/             # Shared or core models
+│   ├── tests/                  # dbt tests
+│   ├── macros/                 # Custom dbt macros
+│   ├── snapshots/              # dbt snapshots
+│   ├── dbt_project.yml         # dbt project configuration
+│   └── profiles.yml            # dbt connection configuration
+├── astro/                      # Astro project directory
+│   ├── config.yaml             # Astro project configuration
+│   ├── docker-compose.override.yml # Customizations for Astro
+│   ├── .astro/                 # Astro-specific files
+│   └── templates/
 ├── config/                      # Configuration files (e.g., for connections, parameters)
 │   ├── dev_config.yaml
 │   ├── prod_config.yaml
