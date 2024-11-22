@@ -1,0 +1,14 @@
+development:
+  ECR_AWS_REGION: us-east-2
+  ECR_AWS_ACCOUNT: 244020757792
+  ECR_AWS_ROLE: CIDeployAccess
+  APP_DEFAULT:
+    APP_REGION: us-east-2
+    APP_IMAGE: "244020757792.dkr.ecr.us-east-2.amazonaws.com/poli-airflow"
+production:
+  ECR_AWS_REGION: us-east-2
+  ECR_AWS_ACCOUNT: 244020757792
+  ECR_AWS_ROLE: CIDeployAccess
+  APP_DEFAULT:
+    APP_REGION: us-east-2
+    APP_IMAGE: "244020757792.dkr.ecr.us-east-2.amazonaws.com/poli-airflow" 
