@@ -11,3 +11,7 @@ target
 dbt.log
 profiles.yml
 postgres-db-volume
+poli-airflow/logs/
+poli-airflow/dbt/logs/
+poli-airflow/airflow/logs/
+airflow/logs/
