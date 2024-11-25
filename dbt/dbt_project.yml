@@ -34,3 +34,15 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+    marketing:
+      + tag: marketing  ## todas as models dentro de marketing recebem a tag marketing
+    finance:
+      + tag: finance
+    product: 
+      + tag: product 
+    sales:
+      + tag: sales 
+    cs:
+      + tag: cs 
+    shared: 
+      + tag: shared

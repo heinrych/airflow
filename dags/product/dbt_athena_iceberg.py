@@ -13,6 +13,7 @@ default_args = {
 DBT_PATH = "/opt/airflow/dbt"
 DBT_PROFILE = "dbt_athena_iceberg" ## nome do profile definido no profile.yml
 DBT_TARGETS = "dev"
+TAGS = "daily"
 
 # Profile enviroment
 profile_config = ProfileConfig(
@@ -40,6 +41,7 @@ dbt_running_models = DbtTaskGroup(
     group_id="dbt_running_models",
     project_config=project_config,
     profile_config=profile_config,
+    dbt_args={"--select": TAGS},
     default_args={"retries": 2},
     dag=dag,
 )

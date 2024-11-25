@@ -1,0 +1,281 @@
+version: 2
+
+
+sources:
+
+  - name: aurora_mysql
+    tables:
+
+      - name: users
+        database: awscatalog  # Nome do catálogo do Athena
+        external:
+          location: 's3://poli-redshift-migration-bucket/lake/staging/aurora_mysql/polichat/users'  # Caminho no S3
+          row_format: "SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'"  # Definição do formato de linha (se necessário)
+          serde_properties: "('serialization.format' = '\t', 'field.delim' = '\t')"  # Definição de separador e formato
+          table_properties: "('has_encrypted_data' = 'false')"  # Propriedades da tabela
+          hive_compatible_partitions: true  # Se as partições forem compatíveis com Hive
+          partitions:
+            - name: customer_id  # Exemplo de particionamento por customer_id
+              data_type: bigint
+            - name: status  # Exemplo de particionamento por status
+              data_type: bigint
+        columns:
+          - name: id
+            data_type: bigint
+          - name: uuid
+            data_type: string
+          - name: active_account_uuid
+            data_type: string
+          - name: customer_id
+            data_type: bigint
+          - name: phone
+            data_type: string
+          - name: name
+            data_type: string
+          - name: email
+            data_type: string
+          - name: cpf
+            data_type: string
+          - name: bot
+            data_type: bigint
+          - name: trigger
+            data_type: bigint
+          - name: score
+            data_type: double
+          - name: evaluations
+            data_type: bigint
+          - name: password
+            data_type: string
+          - name: remember_token
+            data_type: string
+          - name: password_changed
+            data_type: bigint
+          - name: count_chats
+            data_type: bigint
+          - name: count_open_chats
+            data_type: bigint
+          - name: count_closed_chats
+            data_type: bigint
+          - name: setor
+            data_type: bigint
+          - name: canal
+            data_type: bigint
+          - name: status
+            data_type: bigint
+          - name: gender
+            data_type: string
+          - name: facebook
+            data_type: string
+          - name: google
+            data_type: string
+          - name: picture
+            data_type: string
+          - name: country
+            data_type: string
+          - name: state
+            data_type: string
+          - name: city
+            data_type: string
+          - name: permissions
+            data_type: bigint
+          - name: locale
+            data_type: string
+          - name: timezone
+            data_type: string
+          - name: active
+            data_type: bigint
+          - name: last_login
+            data_type: timestamp
+          - name: api_token
+            data_type: string
+          - name: available_service
+            data_type: bigint
+          - name: created_at
+            data_type: timestamp
+          - name: updated_at
+            data_type: timestamp
+          - name: deleted_at
+            data_type: timestamp
+          - name: revsync
+            data_type: bigint
+          - name: channels_config
+            data_type: string
+          - name: user_control
+            data_type: bigint
+          - name: order_chats
+            data_type: bigint
+          - name: edit_contacts
+            data_type: bigint
+          - name: change_name
+            data_type: bigint
+          - name: blocked_redirect
+            data_type: bigint
+          - name: supervisor_view_no_assignment
+            data_type: bigint
+          - name: session_id
+            data_type: string
+          - name: blocked_until
+            data_type: timestamp
+          - name: blocked_reason
+            data_type: string
+          - name: block_ignored
+            data_type: bigint
+
+      - name: messages
+        database: awscatalog  # Nome do catálogo no Athena
+        external:
+          location: 's3://poli-redshift-migration-bucket/lake/staging/aurora_mysql/polichat/messages'  # Caminho no S3
+          row_format: "SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'"  # Formato de linha (se necessário)
+          serde_properties: "('serialization.format' = '\t', 'field.delim' = '\t')"  # Propriedades do SerDe
+          table_properties: "('has_encrypted_data' = 'false')"  # Propriedades da tabela
+          hive_compatible_partitions: true  # Partições compatíveis com Hive (se necessário)
+          partitions:
+            - name: customer_id  # Exemplo de particionamento por customer_id
+              data_type: bigint
+            - name: status  # Exemplo de particionamento por status
+              data_type: bigint
+        columns:
+          - name: id
+            data_type: bigint
+          - name: customer_id
+            data_type: bigint
+          - name: channel_id
+            data_type: bigint
+          - name: chat_id
+            data_type: bigint
+          - name: user_id
+            data_type: bigint
+          - name: contact_id
+            data_type: bigint
+          - name: message_id
+            data_type: bigint
+          - name: token
+            data_type: string
+          - name: uid
+            data_type: string
+          - name: contact_uid
+            data_type: string
+          - name: contact_name
+            data_type: string
+          - name: contact_type
+            data_type: string
+          - name: message_author_name
+            data_type: string
+          - name: message_author_uid
+            data_type: string
+          - name: message_author_id
+            data_type: bigint
+          - name: cc
+            data_type: string
+          - name: bcc
+            data_type: string
+          - name: message_body
+            data_type: string
+          - name: message_body_html
+            data_type: string
+          - name: message_body_b64
+            data_type: string
+          - name: email_message_id
+            data_type: string
+          - name: in_reply_to
+            data_type: string
+          - name: attachments
+            data_type: string
+          - name: message_body_url
+            data_type: string
+          - name: message_body_size
+            data_type: string
+          - name: message_body_thumb
+            data_type: string
+          - name: message_body_caption
+            data_type: string
+          - name: message_body_mimetype
+            data_type: string
+          - name: message_body_contact
+            data_type: string
+          - name: message_body_vcard
+            data_type: string
+          - name: message_body_name
+            data_type: string
+          - name: message_body_lat
+            data_type: string
+          - name: message_body_lng
+            data_type: string
+          - name: message_dtm
+            data_type: string
+          - name: message_uid
+            data_type: string
+          - name: reply_message_uid
+            data_type: string
+          - name: message_cuid
+            data_type: string
+          - name: message_dir
+            data_type: string
+          - name: message_type
+            data_type: string
+          - name: message_ack
+            data_type: string
+          - name: event
+            data_type: string
+          - name: status
+            data_type: bigint
+          - name: resent
+            data_type: bigint
+          - name: error
+            data_type: string
+          - name: created_at
+            data_type: timestamp
+          - name: updated_at
+            data_type: timestamp
+          - name: revsync
+            data_type: bigint
+          - name: order
+            data_type: bigint
+          - name: deleted_at
+            data_type: timestamp    
+
+  - name: logs_trigger
+    tables:
+      - name: trigger
+        database: awscatalog  # Nome do catálogo no Athena
+        external:
+          location: 's3://poli-redshift-migration-bucket/logs/trigger'  # Caminho no S3
+          row_format: "SERDE 'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'"  # Formato Parquet
+          serde_properties: "('classification' = 'parquet')"  # Propriedades do SerDe
+          table_properties: ""  # Propriedades adicionais, pode ser preenchido conforme necessário
+          hive_compatible_partitions: true  # Partições compatíveis com Hive
+          partitions:
+            - name: customer_id
+              data_type: bigint
+            - name: date_occur
+              data_type: date
+        columns:
+          - name: channel_id
+            data_type: bigint
+          - name: user_id
+            data_type: bigint
+          - name: contact_id
+            data_type: bigint
+          - name: phone
+            data_type: bigint
+          - name: chat_id
+            data_type: bigint
+          - name: message_id
+            data_type: bigint
+          - name: close_before
+            data_type: string
+          - name: result
+            data_type: string
+          - name: close_after
+            data_type: string
+
+  - name: redshift 
+    database: polichat
+    schema: poli
+    tables:
+      - name: contacts 
+      - name: customers 
+      - name: customer_users
+      - name: channel_customers
+      - name: users
+     

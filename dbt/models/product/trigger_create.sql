@@ -1,3 +1,9 @@
+{{
+	config(
+		materialized='view',
+		tags=['product','daily']
+	)
+}}
 WITH trigger_data AS (
     SELECT
         channel_id,

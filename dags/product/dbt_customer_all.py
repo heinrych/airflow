@@ -18,6 +18,8 @@ logger = logging.getLogger("airflow.task")
 
 DBT_DIR = "/opt/***/dbt"
 
+TAG = "--select : shared daily "
+
 print(f"Variáveis: DBT_REDSHIFT_USER={os.getenv('DBT_REDSHIFT_USER')}, DBT_REDSHIFT_PASSWORD={os.getenv('DBT_REDSHIFT_PASSWORD')}, DBT_REDSHIFT_SCHEMA={os.getenv('DBT_REDSHIFT_SCHEMA')}, DBT_REDSHIFT_PORT={os.getenv('DBT_REDSHIFT_PORT')}")
 
 logger.debug(f"Variáveis: DBT_REDSHIFT_USER={os.getenv('DBT_REDSHIFT_USER')}, DBT_REDSHIFT_PASSWORD={os.getenv('DBT_REDSHIFT_PASSWORD')}, DBT_REDSHIFT_SCHEMA={os.getenv('DBT_REDSHIFT_SCHEMA')}, DBT_REDSHIFT_PORT={os.getenv('DBT_REDSHIFT_PORT')}")
@@ -42,17 +44,17 @@ with DAG(
     # In practice, we'd usually expect the data to have already been loaded to the database.
     dbt_seed = BashOperator(
         task_id="dbt_seed",
-        bash_command=f"/home/airflow/.local/bin/dbt seed --profiles-dir {DBT_DIR} --project-dir {DBT_DIR}",
+        bash_command=f"/home/airflow/.local/bin/dbt seed {TAG} --profiles-dir {DBT_DIR} --project-dir {DBT_DIR}",
     )
 
     dbt_run = BashOperator(
         task_id="dbt_run",
-        bash_command=f"/home/airflow/.local/bin/dbt run --profiles-dir {DBT_DIR} --project-dir {DBT_DIR}",
+        bash_command=f"/home/airflow/.local/bin/dbt run {TAG} --profiles-dir {DBT_DIR} --project-dir {DBT_DIR}",
     )
 
     dbt_test = BashOperator(
         task_id="dbt_test",
-        bash_command=f"/home/airflow/.local/bin/dbt test --profiles-dir {DBT_DIR} --project-dir {DBT_DIR}",
+        bash_command=f"/home/airflow/.local/bin/dbt test {TAG} --profiles-dir {DBT_DIR} --project-dir {DBT_DIR}",
     )
 
     dbt_seed >> dbt_run >> dbt_test
